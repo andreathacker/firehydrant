@@ -33,7 +33,7 @@ psql:
 
 # Access the psql command line for the development db
 psql-dev:
-	docker-compose exec db psql -U postgres -d
+	docker-compose exec db psql -U postgres -d development
 
 # Run the api container and bash into it
 bash:
