@@ -30,6 +30,8 @@ module FireHydrant
     config.api_only = true
 
     # Use UUIDs as the default primary key type
-    config.active_record.primary_key_type = :uuid
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+    end
   end
 end
