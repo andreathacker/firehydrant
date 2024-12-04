@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_04_043040) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_04_043827) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
 
+  create_table "clues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "incident_id", null: false
+    t.uuid "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_clues_on_event_id", unique: true
+    t.index ["incident_id"], name: "index_clues_on_incident_id", unique: true
+  end
 end
