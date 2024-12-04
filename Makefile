@@ -23,9 +23,13 @@ server:
 db-setup:
 	docker-compose exec api bash -c "rails db:setup"
 
-# RUn rails database migration
+# Run rails database migration
 db-migrate:
 	docker-compose exec api bash -c "rails db:migrate"
+
+# Annotate rails models
+annotate:
+	docker-compose exec api bash -c "rails g annotate:models"
 
 # Access the psql command line inside the db container
 psql:
