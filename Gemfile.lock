@@ -300,10 +300,13 @@ PLATFORMS
 
 DEPENDENCIES
 <<<<<<< HEAD
+<<<<<<< HEAD
   annotate
 =======
   annotaterb
 >>>>>>> fab7182 (clue-model: Add annotations to models)
+=======
+>>>>>>> af6746b (Revert "clue-model: Add annotations")
   bootsnap
   brakeman
   debug
