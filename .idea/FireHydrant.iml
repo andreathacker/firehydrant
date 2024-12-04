@@ -4,7 +4,9 @@
     <shared />
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/tmp/cache" />
+    </content>
     <orderEntry type="jdk" jdkName="Remote: ruby-3.3.6-p108" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="actioncable (v8.0.0, Remote: ruby-3.3.6-p108) [gem]" level="application" />
