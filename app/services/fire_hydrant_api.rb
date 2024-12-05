@@ -1,21 +1,23 @@
 require "httparty"
 
-module Services
-  API_URL = "https://api.firehydrant.io/v1/"
+API_URL = "https://api.firehydrant.io/v1/"
 
-  class FireHydrantApi
-    def initialize(http_client: HTTParty)
-      @http_client = http_client
-    end
+class FireHydrantApi
+  def initialize(http_client: HTTParty)
+    @http_client = http_client
+  end
 
-    def get_incident_events(incident_id)
-      # TODO: Add error handling
-      response = @http_client.get(
-        "#{API_URL}/incidents/#{incident_id}/events",
-        headers: { "Authorization" => ENV["FIRE_HYDRANT_API_KEY"] }
-      )
-      response.parsed_response
-    end
+  def self.build
+    FireHydrantApi.new
+  end
+
+  def get_incident_events(incident_id)
+    # TODO: Add error handling
+    response = @http_client.get(
+      "#{API_URL}/incidents/#{incident_id}/events",
+      headers: { "Authorization" => ENV["FIRE_HYDRANT_API_KEY"] }
+    )
+    response.parsed_response
   end
 end
 
