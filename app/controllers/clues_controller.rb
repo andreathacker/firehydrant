@@ -1,10 +1,10 @@
 class CluesController < ApplicationController
-  def show
-    render json: { "action": "show" }
-  end
-
   def index
     render json: { "action": "index" }
+  end
+
+  def show
+    render json: { "action": "show" }
   end
 
   def create
