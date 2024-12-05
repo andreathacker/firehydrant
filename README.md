@@ -76,6 +76,7 @@ GET /incidents/:incident_id/clues
 To create a new message on the timeline and also save it as a clue 
 ```
 POST /incidents/:incident_id/clues
+{"body": "your message here"}
 ```
 
 ### CRUD API 
