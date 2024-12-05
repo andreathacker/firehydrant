@@ -34,7 +34,7 @@ class IncidentClues
   rescue => e
     Rails.logger.error(e)
     [
-      { error: "Internal server error #{e}" },
+      { error: "Internal server error" },
       :internal_server_error
     ]
   end
@@ -61,7 +61,7 @@ class IncidentClues
   rescue => e
     Rails.logger.error(e)
     [
-      { error: "Internal server error #{e}" },
+      { error: "Internal server error" },
       :internal_server_error
     ]
   end
