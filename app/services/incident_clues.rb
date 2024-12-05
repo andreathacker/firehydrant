@@ -21,8 +21,4 @@ class IncidentClues
 
     event_clues
   end
-  
-  def show(incident_id, event_id)
-    
-  end
 end
