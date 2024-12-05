@@ -1,5 +1,5 @@
 class IncidentClues
-  def initialize(fire_hydrant_api: FireHydrantApi, clue_model: Clue)
+  def initialize(fire_hydrant_api: FireHydrantApi.build, clue_model: Clue)
     @fire_hydrant_api = fire_hydrant_api
     @clue_model = clue_model
   end
@@ -12,6 +12,13 @@ class IncidentClues
   end
 
   def list_clues(incident_id)
+    if incident_id.blank?
+      return [
+        { error: "Invalid incident_id" },
+        :bad_request
+      ]
+    end
+
     incident_events = @fire_hydrant_api.get_incident_events(incident_id)["data"]
 
     event_clues = []
@@ -20,7 +27,15 @@ class IncidentClues
         event_clues.append(event)
       end
     end
-
-    event_clues
+    [
+      { data: event_clues },
+      :ok
+    ]
+  rescue => e
+    Rails.logger.error(e)
+    [
+      { error: "Internal server error" },
+      :internal_server_error
+    ]
   end
 end

@@ -10,8 +10,7 @@
 #
 # Indexes
 #
-#  index_clues_on_event_id     (event_id) UNIQUE
-#  index_clues_on_incident_id  (incident_id) UNIQUE
+#  index_clues_on_event_id  (event_id) UNIQUE
 #
 class Clue < ApplicationRecord
 end
