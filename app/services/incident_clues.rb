@@ -9,7 +9,20 @@ class IncidentClues
     )
   end
 
-  def show(incident_id)
-    @fire_hydrant_api.get_incident_events(incident_id)
+  def index(incident_id)
+    incident_events = @fire_hydrant_api.get_incident_events(incident_id)["data"]
+
+    event_clues = []
+    incident_events.each do |event|
+      if Clue.exists?(event_id: event["id"])
+        event_clues.append(event)
+      end
+    end
+
+    event_clues
+  end
+  
+  def show(incident_id, event_id)
+    
   end
 end
