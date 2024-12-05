@@ -11,19 +11,30 @@ DB_NAME=development
 DB_HOST=localhost
 DB_PORT=5432
 
-# Default target to build the containers
 build:
 	docker-compose build
 
-# Run rails server
-server:
-	docker-compose up api
+start:
+	docker-compose up api -d
 
-# Run database setup or migration in the api container
-db-setup:
-	docker-compose exec api bash -c "rails db:setup"
+stop:
+	docker-compose down
 
-# RUn rails database migration
+destroy:
+	docker-compose down -v
+
+restart:
+	docker-compose down
+	docker-compose up --build
+
+# Initial setup
+setup:
+	docker-compose build
+	docker-compose up -d
+	docker-compose exec api bash -c "rails db:create"
+	docker-compose exec api bash -c "rails db:migrate"
+
+# Run rails database migration
 db-migrate:
 	docker-compose exec api bash -c "rails db:migrate"
 
@@ -35,23 +46,5 @@ psql:
 psql-dev:
 	docker-compose exec db psql -U postgres -d development
 
-# Run the api container and bash into it
-bash:
-	docker-compose exec $(API_SERVICE) bash
-
-# Run all services (api + db)
-up:
-	docker-compose up
-
-# Stop all services
-down:
-	docker-compose down
-
-# Logs for the API service
-logs:
-	docker-compose logs -f $(API_SERVICE)
-
-# Rebuild the containers and start them
-restart:
-	docker-compose down
-	docker-compose up --build
+rspec:
+	docker-compose exec api bash -c "bundle exec rspec"

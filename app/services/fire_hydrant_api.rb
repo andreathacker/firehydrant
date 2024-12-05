@@ -12,12 +12,10 @@ class FireHydrantApi
   end
 
   def get_incident_events(incident_id)
-    puts("incident_id: #{incident_id}")
     url = "#{API_URL}/incidents/#{incident_id}/events"
     response = @http_client.get(
       url,
-      # headers: { "Authorization" => ENV["FIRE_HYDRANT_API_KEY"] },
-      headers: { "Authorization" => "fhb-efe3e40376f98fc05f4ae830a8546218" }
+      headers: { "Authorization" => ENV["FIRE_HYDRANT_API_KEY"] }
     )
 
     unless response.success?
@@ -43,7 +41,6 @@ class FireHydrantApi
   end
 
   def log_error(error, url)
-    puts(error)
     Rails.logger.warn(
       {
         tag: self.class.name,
