@@ -54,6 +54,11 @@ class IncidentClues
     end
 
     response = @fire_hydrant_api.create_event(incident_id, body)
+    @clue_model.create!(
+      incident_id: incident_id,
+      event_id: response["id"]
+    )
+
     [
       response,
       :ok
