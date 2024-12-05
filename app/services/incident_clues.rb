@@ -1,5 +1,5 @@
 class IncidentClues
-  def initialize(fire_hydrant_api: FireHydrantApi, clue_model: Clue)
+  def initialize(fire_hydrant_api: FireHydrantApi.build, clue_model: Clue)
     @fire_hydrant_api = fire_hydrant_api
     @clue_model = clue_model
   end
