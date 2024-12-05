@@ -12,10 +12,12 @@ class FireHydrantApi
   end
 
   def get_incident_events(incident_id)
+    puts("incident_id: #{incident_id}")
     url = "#{API_URL}/incidents/#{incident_id}/events"
     response = @http_client.get(
       url,
-      headers: { "Authorization" => ENV["FIRE_HYDRANT_API_KEY"] }
+      # headers: { "Authorization" => ENV["FIRE_HYDRANT_API_KEY"] },
+      headers: { "Authorization" => "fhb-efe3e40376f98fc05f4ae830a8546218" }
     )
 
     unless response.success?
@@ -32,21 +34,22 @@ class FireHydrantApi
   def log_success(response, url)
     Rails.logger.info(
       {
-        "tag": self.class.name,
-        "response": response,
-        "url": url,
-        "message": "Request success"
+        tag: self.class.name,
+        response: response,
+        url: url,
+        message: "Request success"
       }
     )
   end
 
   def log_error(error, url)
+    puts(error)
     Rails.logger.warn(
       {
-        "tag": self.class.name,
-        "error": error,
-        "url": url,
-        "message": "Failed to make request"
+        tag: self.class.name,
+        error: error,
+        url: url,
+        message: "Failed to make request"
       }
     )
   end

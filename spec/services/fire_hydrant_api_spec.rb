@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe FireHydrantApi, type: :model do
   let(:http_client) { class_double("HTTParty") }
   let(:fire_hydrant_api) { FireHydrantApi.new(http_client: http_client) }
-  let(:incident_id) { "12345" }
+  let(:incident_id) { "1-1-1-1" }
 
   describe "#get_incident_events" do
     context "when the request is successful" do
