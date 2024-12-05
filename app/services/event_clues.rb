@@ -23,7 +23,7 @@ class EventClues
   rescue => e
     Rails.logger.error(e)
     [
-      { error: "Internal server error" },
+      { error: "Internal server error #{e}" },
       :internal_server_error
     ]
   end

@@ -8,6 +8,9 @@ class IncidentsCluesController < ApplicationController
 
   def create
     incident_id = params[:incident_id]
-    render json: { success: true, incident_id: incident_id }
+    body = JSON.parse(request.body.read)
+    incident_clues = IncidentClues.build
+    response = incident_clues.create_clue(incident_id, body)
+    render json: response[0], status: response[1]
   end
 end

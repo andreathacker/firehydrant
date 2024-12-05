@@ -29,6 +29,25 @@ class FireHydrantApi
     raise e
   end
 
+  def create_event(incident_id, body)
+    url = "#{API_URL}/incidents/#{incident_id}/generic_chat_messages"
+    response = @http_client.post(
+      url,
+      body: body,
+      headers: { "Authorization" => ENV["FIRE_HYDRANT_API_KEY"] }
+    )
+
+    unless response.success?
+      raise "Request failed - code: #{response.code}, body: #{response.body}"
+    end
+
+    log_success(response, url)
+    response.parsed_response
+  rescue => e
+    log_error(e, url)
+    raise e
+  end
+
   def log_success(response, url)
     Rails.logger.info(
       {

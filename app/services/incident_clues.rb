@@ -34,7 +34,34 @@ class IncidentClues
   rescue => e
     Rails.logger.error(e)
     [
-      { error: "Internal server error" },
+      { error: "Internal server error #{e}" },
+      :internal_server_error
+    ]
+  end
+
+  def create_clue(incident_id, body)
+    if incident_id.blank?
+      return [
+        { error: "Invalid incident_id" },
+        :bad_request
+      ]
+    end
+    if body.blank?
+      return [
+        { error: "Invalid body" },
+        :bad_request
+      ]
+    end
+
+    response = @fire_hydrant_api.create_event(incident_id, body)
+    [
+      response,
+      :ok
+    ]
+  rescue => e
+    Rails.logger.error(e)
+    [
+      { error: "Internal server error #{e}" },
       :internal_server_error
     ]
   end
